@@ -15,11 +15,20 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@fontsource/ibm-plex-mono": "^4.2.2",
+    "@react-three/drei": "^5.3.0",
+    "@react-three/fiber": "^6.2.2",
     "gatsby": "^3.4.0",
     "gatsby-plugin-google-analytics": "^3.4.0",
+    "gatsby-plugin-image": "^1.4.0",
     "gatsby-plugin-sass": "^4.4.0",
+    "gatsby-plugin-sharp": "^3.4.0",
+    "gatsby-source-filesystem": "^3.4.0",
+    "gatsby-transformer-sharp": "^3.4.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "sass": "^1.32.12"
+    "sass": "^1.32.12",
+    "three": "^0.129.0",
+    "tone": "^14.7.77"
   }
 }

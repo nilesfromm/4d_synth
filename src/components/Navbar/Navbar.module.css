@@ -1,0 +1,303 @@
+#navwrap {
+    width: 100%;
+    height: 80px;
+    border-bottom: solid 1px #E0E0E0;
+}
+#nav {
+    /* z-index: 10; */
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 80px;
+    /* border-bottom: solid 1px #E0E0E0; */
+    margin: 0 auto;
+    max-width: 1200px;
+}
+@media (max-width: 500px) {
+    #navwrap {
+        height: 60px;
+    }
+    #nav {
+        height: 60px;
+        background-color: #ffffff;
+    }
+}
+
+#logo {
+    position: relative;
+    width: 100px;
+    height: 50px;
+    /* top: 28px; */
+    left: 20px;
+    transition: opacity 0.25s;
+}
+
+#logoHover {
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    transition: opacity 0.25s;
+}
+#logoHover:hover {
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+@media (max-width: 500px) {
+    #logo {
+        left: 20px;
+        width: 69px;
+        height: 34px;
+    }
+    #logoHover {
+        width: 69px;
+        height: 34px;
+    }
+}
+
+#menu {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    height: 100%;
+    right: -10px;
+}
+
+#menu > a {
+    position: relative;
+    margin-right: 30px;
+    /* top: 28px; */
+    text-decoration: none;
+    color: #333333;
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    transition: opacity 0.25s;
+}
+
+
+
+  /* display: flex;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom: solid 2px #ccc;
+
+  @media (max-width: 500px) {
+    z-index:0;
+    flex-direction: column;
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 70px);
+    justify-content: flex-start;
+    background-color: #fff;
+    transition: top 0.7s ease;
+    top: ${props => (props.open ? "calc(-100% + 140px)" : "68px")};
+  } */
+
+#menu > a:hover {
+    opacity: 0.4;
+    transition: opacity 0.25s;
+}
+
+@media (max-width: 500px) {
+    #menu {
+        z-index: -6;
+        flex-direction: column;
+        width: 100%;
+        height: calc(100vh + 80px);
+        justify-content: flex-start;
+        align-items: flex-start;
+        background-color: #ffffff;
+        transition: top 0.5s ease, opacity 0.5s ease, z-index 0.5s ease;
+        top: -80px;
+        right: 0;
+        opacity: 0;
+    }
+    #menu.open {
+        transition: top 0.5s ease, opacity 0.5s ease, z-index 0.5s ease;
+        z-index: -1;
+        top: 60px;
+        opacity: 1;
+    }
+    #menu > a {
+        /* display: none; */
+        font-size: 24px;
+        margin-left: 20px;
+        margin-top: 30px;
+    }
+}
+
+#toggle {
+    position: absolute;
+    display: none;
+    align-items: center;
+    flex-direction: row;
+    height: 22px;
+    /* top: 29px; */
+    right: 19px;
+    transition: opacity 0.25s;
+    /* background-color: lightcoral; */
+    /* display: flex;
+    background-color: lightcoral;
+    position: absolute;
+    align-items: center;
+    flex-direction: row;
+    height: 100%;
+    right: 0px; */
+}
+
+#toggle:hover {
+    cursor: pointer;
+    opacity: 0.4;
+    transition: opacity 0.25s;
+}
+
+@media (max-width: 500px) {
+    #toggle {
+        display: flex;
+    }
+}
+
+#hamburger {
+    background-color: #111;
+    width: 25px;
+    height: 4px;
+    transition: all .4s ease;
+    align-self: center;
+    position: relative;
+    z-index: 10;
+    /* transform: ${props => (props.open ? "rotate(-0deg)" : "inherit")}; */
+}
+#hamburger.open {
+    background-color: #ffffff;
+}
+#hamburger::before,
+#hamburger::after {
+    width: 25px;
+    height: 4px;
+    background-color: #111;
+    content: "";
+    position: absolute;
+    transition: all 0.4s ease;
+}
+#hamburger::before {
+    top: -9px;
+}
+#hamburger.open::before {
+    top: -9px;
+    transform: translate(0px,9px) rotate(45deg);
+    opacity: 1;
+}
+#hamburger::after {
+    top: 9px;
+}
+#hamburger.open::after {
+    top: 9px;
+    transform: translate(0px, -9px) rotate(-45deg);
+    opacity: 1;
+}
+
+
+
+
+
+/* 
+
+
+
+const NavWrap = styled.div`
+  background-color: #fff;
+  position: fixed;
+  width: 100%;
+  border-bottom: solid 2px #ccc;
+`
+const Navigation = styled.nav`
+  height: 70px;
+  max-width: 1200px;
+  background-color: #fff;
+  position: relative;
+  margin: 0 auto;
+  z-index: 50;
+  @media (max-width: 500px) {
+  }
+`
+
+const BackNav = styled.div`
+  height: 70px;
+  width: 100%;
+  background-color: #fff;
+  position: absolute;
+  border-bottom: solid 2px #ccc;
+  z-index: 5;
+`
+
+const Toggle = styled.div`
+  display: none;
+  height: 100%;
+  cursor: pointer;
+  padding: 0 30px;
+  float: right;
+  @media (max-width: 500px) {
+    display: flex;
+  }
+`
+
+const Navbox = styled.div`
+  display: flex;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom: solid 2px #ccc;
+
+  @media (max-width: 500px) {
+    z-index:0;
+    flex-direction: column;
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 70px);
+    justify-content: flex-start;
+    background-color: #fff;
+    transition: top 0.7s ease;
+    top: ${props => (props.open ? "calc(-100% + 140px)" : "68px")};
+  }
+`
+
+const Hamburger = styled.div`
+  background-color: #111;
+  width: 30px;
+  height: 3px;
+  transition: all .4s ease;
+  align-self: center;
+  position: relative;
+  z-index: 10;
+  transform: ${props => (props.open ? "rotate(-0deg)" : "inherit")};
+
+  ::before,
+  ::after {
+    width: 30px;
+    height: 3px;
+    background-color: #111;
+    content: "";
+    position: absolute;
+    transition: all 0.4s ease;
+  }
+
+  ::before {
+    transform: ${props =>
+      props.open ? "translate(0px, 10px) rotate(0deg)" : "rotate(0deg)"};
+    top: -10px;
+  }
+
+  ::after {
+    opacity: ${props => (props.open ? "1" : "1")};
+    transform: ${props => (props.open ? "rotate(0deg) translate(0px, -10px)" : "rotate(0deg)")};
+    top: 10px;
+  } */

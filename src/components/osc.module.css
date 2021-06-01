@@ -1,0 +1,70 @@
+#osc {
+    width: 100%;
+    height: 200px;
+}
+
+.dial {
+    position: relative;
+    top: 115px;
+    left: 10px;
+}
+
+.slider {
+    position: relative;
+    padding: 0 1px;
+    top:55px;
+    right: 23px;
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    transform: rotate(270deg);
+    width: 100px; /* Full-width */
+    height: 14px; /* Specified height */
+    border-radius: 7px;
+    background: #E0E0E0; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.8; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    box-shadow: -2px 0px 4px 0px #00000040 inset;
+  }
+  
+  /* Mouse-over effects */
+  .slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+  
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 12px; /* Set a specific slider handle width */
+    height: 12px; /* Slider handle height */
+    background: #F2F2F2;
+    border-radius: 7px;
+    cursor: pointer; /* Cursor on hover */
+    box-shadow: -4px 0px 4px 0px #00000040;
+  }
+
+  h1{
+    position: relative;
+    top:120px;
+    text-align: center;
+    font-family: IBM Plex Mono;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    background-color: transparent;
+
+    color: #333333;
+  }
+
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }

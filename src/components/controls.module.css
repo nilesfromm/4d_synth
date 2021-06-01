@@ -1,0 +1,15 @@
+#wrap {
+    width: 100%;
+    height: 220px;
+    border-top: solid 1px #E0E0E0;
+    /* background-color: coral; */
+    position: absolute;
+    background-color: whitesmoke;
+}
+
+.sine {
+    position: relative;
+    margin-left: 0px;
+    float: right;
+    width: 60px;
+}

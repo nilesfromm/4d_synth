@@ -1,14 +1,27 @@
+const path = require(`path`)
+
 module.exports = {
   siteMetadata: {
-    title: "synth",
+    title: `Niles Fromm`,
+    description: `Design Portfolio`,
+    author: `@nilesfromm`,
   },
   plugins: [
-    "gatsby-plugin-sass",
     {
-      resolve: "gatsby-plugin-google-analytics",
+      resolve: `gatsby-source-filesystem`,
       options: {
-        trackingId: "G-K1VF8M0DEM",
+        name: `src`,
+        path: `${__dirname}/src/`,
       },
     },
-  ],
-};
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/images`,
+      },
+    },
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`, // Needed for dynamic images
+],
+}
