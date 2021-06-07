@@ -1,39 +1,48 @@
 import React, { useState, useRef, useEffect } from "react"
-import { Link } from "gatsby"
 import * as s from "./osc.module.css"
 import * as Tone from 'tone'
 import Dial from "./dial"
+import { getState, useStore } from "../utils/store"
 
-
-const Osc = (props) => {
-    const [freq, setFreq] = React.useState(50);
-    let variance = 2/10000
-    let def_freq = 440
+function Osc ({
+    dest,
+    Id,
+}){
     let def_vol = -60
-    // console.log(props.dest);
-    const vol = useRef(new Tone.Volume(def_vol*(1+variance)).connect(props.dest));
-    const osc = useRef(new Tone.Oscillator(Number(def_freq*(1+variance)),"sine").connect(vol.current));
+    const { osc, setFreq, setAmp } = useStore()
 
-    useEffect(() => {
-        vol.current.volume.value = -60.0
-        osc.current.frequency.value = 440
-    },[])
+    const oscVals = useRef(useStore.getState().osc)
+
+    useEffect(() => useStore.subscribe(
+        (osc) => (oscVals.current = osc),
+        state => state.osc,
+    ), [])
+
+    const ampRef = useRef(null);
+    const freqRef = useRef(null);
+
+    useEffect(() => (
+        ampRef.current = new Tone.Volume(osc[Id].amp).connect(dest),
+        freqRef.current = new Tone.Oscillator(osc[Id].freq,"sine").connect(ampRef.current)
+    ), [])
 
     const setF = (f) => {
-        osc.current.frequency.value = Number(f*(1+variance));
-        setFreq(f);
+        setFreq(Id,f)
+        freqRef.current.frequency.value = f;
     }
     const setV = (v) => {
-        vol.current.volume.value = Number(v*(1+variance))
+        setAmp(Id,v)
+        console.log(-30 + v/2)
+        ampRef.current.volume.value = -30 + v/3;
     }
+    // console.log(Id);
 
     return (
         <div id={s.osc}>
-
             <input 
             type="range" 
             className={s.slider}
-            id={"v" + props.Id} 
+            id={"v" + Id} 
             min="-60.0" 
             max="0.0" 
             step="0.01"
@@ -41,23 +50,23 @@ const Osc = (props) => {
             onChange={(event) => {
                 setV(event.target.value);
                 if(event.target.value<-59){
-                  osc.current.stop();
+                  freqRef.current.stop();
                 }
-                else if(osc.current.state == 'stopped'){
-                  osc.current.start();
+                else if(freqRef.current.state == 'stopped'){
+                  freqRef.current.start();
                 }
-                // Tone.start();
+                Tone.start();
             }}/>
             <div className={s.dial}>
                 <Dial 
-                    value={osc.current.frequency.value} 
+                    value={osc[Id].freq} 
                     onChange={setF}
                     min={20}
                     max={1000}
                     // scale={500} 
                 />
             </div>
-            <h1 className={s.noselect}>{Math.round(osc.current.frequency.value)}</h1>
+            <h1 className={s.noselect}>{Math.round(osc[Id].freq)}</h1>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, createContext } from "react"
 //import { Global, css, jsx } from "@emotion/react"
 // import styled from "@emotion/styled"
 import "@fontsource/ibm-plex-mono/500.css"
@@ -11,13 +11,13 @@ import Three from "./ThreeJS"
 
 export default function Layout({ children }) {
   return (
-    <div id={s.pagewrap}>
-      {/* <Navbar /> */}
-      <div id={s.wrap}>
-        {/* {children} */}
-        <Three />
+      <div id={s.pagewrap}>
+        {/* <Navbar /> */}
+        <div id={s.wrap}>
+          {/* {children} */}
+          <Three />
+        </div>
+        <Controls />
       </div>
-      <Controls />
-    </div>
   )
 }
