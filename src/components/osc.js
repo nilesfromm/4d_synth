@@ -34,7 +34,7 @@ function Osc ({
     const setV = (v) => {
         setAmp(Id,v)
         // console.log(-10 + v/1)
-        ampRef.current.volume.value = -15 + v/1;
+        ampRef.current.volume.value = -30 + v/1;
     }
     // console.log(Id);
 

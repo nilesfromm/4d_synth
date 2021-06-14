@@ -1,4 +1,4 @@
-import React, { Suspense } from "react"
+import React, { useEffect, Suspense } from "react"
 import { Canvas } from "@react-three/fiber"
 import { Environment, OrbitControls, softShadows } from "@react-three/drei"
 import { useStore } from "../utils/store"
@@ -49,7 +49,9 @@ const Ground = () => {
     )
 }
 const Three = (props) => {
-    console.log("3props", props);
+    useEffect(() => {
+        console.log("three props loaded")
+    }, [props.loaded])
     return (
         <Canvas 
             shadows
@@ -74,10 +76,10 @@ const Three = (props) => {
                 // shadow-mapSize-height={1024}
             /> */}
             <color attach="background" args={["white"]} />
-            {/* <fog attach="fog" args={["white", 9, 14]} /> */}
+            <fog attach="fog" args={["white", 10, 13]} />
             <Suspense fallback={null}>
                 {/* <Environment files={"SoftLightsStudio2.hdr"} opacity={0} path={"/hdri/"} /> */}
-                <Model l={props.loaded}/>
+                <Model loaded={props.loaded}/>
                 <OrbitControls enableZoom={false} />
                 {/* <Ground /> */}
             </Suspense>

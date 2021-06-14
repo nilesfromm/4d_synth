@@ -8,17 +8,17 @@ import Controls from "./controls"
 import Three from "./ThreeJS"
 
 export default function Layout({ children }) {
-  const preventDefault = e => e.preventDefault();
+  // const preventDefault = e => e.preventDefault();
 
-  window.addEventListener('touchmove', preventDefault, {
-    passive: false
-  });
+  // window.addEventListener('touchmove', preventDefault, {
+  //   passive: false
+  // });
 
   const [loaded, setLoaded] = useState(false);
 
   function toneStart() {
     Tone.start()
-    console.log("started!")
+    console.log("layout started!")
     setLoaded(true)
   }
 
@@ -26,8 +26,8 @@ export default function Layout({ children }) {
 
   return (
       <div id={s.pagewrap} >
-        <div id={s.wrap} hidden={true} >
-          <Three loaded={loaded}/>
+        <div id={s.wrap} style={{display: loaded?"block":"none"}}>
+          <Three loaded={loaded} />
         </div>
         <Controls />
         <div id={s.loading} onClick={toneStart} style={{opacity: loaded?"0":"1", pointerEvents: loaded?"none":""}} >
