@@ -16,11 +16,76 @@
     scrollbar-width: none;  /* Firefox */
 }
 
+#loading {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /* z-index: -10; */
+    background-color: #F5F5F5;
+    /* opacity: 0.1; */
+    transition: opacity 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#loadingText {
+    /* position: relative; */
+    /* top:120px; */
+    text-align: left;
+    font-family: IBM Plex Mono;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    /* line-height: 18px; */
+    background-color: transparent;
+
+    color: #333333;
+}
+p{
+    background-color: transparent;
+}
+a{
+    text-decoration: none;
+}
+
+#startButton {
+    text-decoration: none;
+    border: none;
+    border-radius: 10px;
+    height: 30px;
+    width: 60px;
+    background-color: coral;
+}
+
+.fadeOut{
+    opacity:0;
+    width:0;
+    height:0;
+    transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
+
+}
+.fadeIn{
+    opacity:1;
+    width:100px;
+    height:100px;
+    transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+}
+
+.is-scrollLocked {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+ }
+
 @media (max-width: 500px) {
     #wrap {
         padding: 5px;
-        height: calc(100% - 71px);
-        width: calc(100% - 10px);
+        /* height: calc(100% - 71px);
+        width: calc(100% - 10px); */
     }
 }
 
@@ -35,7 +100,7 @@
     /* scrollbar-width: none; */
     /* margin: 5px 20px; */
     display: fixed;
-    position: absolute;
+    position: fixed;
     /* flex-wrap: wrap; */
     margin: 20px;
     /* left: 20px;
@@ -45,6 +110,7 @@
     /* max-width: 1200px; */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
+    cursor: crosshair;
 }
 
 @media (max-width: 500px) {

@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from "react"
-import * as s from "./controls.module.css"
+import * as s from "./loading.module.css"
 import * as Tone from 'tone'
 import Osc from "./osc"
 
-export default function Controls() {
+export default function Loading() {
   const limiter = useRef(null);
   const [loaded, setLoaded] = useState(false);
   

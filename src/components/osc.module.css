@@ -27,7 +27,7 @@
     transition: opacity .2s;
     box-shadow: -2px 0px 4px 0px #00000040 inset;
   }
-  
+
   /* Mouse-over effects */
   .slider:hover {
     opacity: 1; /* Fully shown on mouse-over */
@@ -40,8 +40,9 @@
     width: 12px; /* Set a specific slider handle width */
     height: 12px; /* Slider handle height */
     background: #F2F2F2;
+    border: none;
     border-radius: 7px;
-    cursor: pointer; /* Cursor on hover */
+    cursor: ns-resize; /* Cursor on hover */
     box-shadow: -4px 0px 4px 0px #00000040;
   }
 
@@ -57,6 +58,27 @@
     background-color: transparent;
 
     color: #333333;
+  }
+
+  @media (max-width: 500px) {
+    .slider {
+      height: 24px;
+      border-radius: 12px;
+      top: 50px;
+    }
+    .slider::-webkit-slider-thumb {
+      width: 20px;
+      height: 20px;
+      /* box-shadow: none; */
+      border-radius: 10px;
+    }
+    .dial {
+      top:105px;
+      cursor: ns-resize;
+    }
+    h1{
+      top: 110px;
+    }
   }
 
   .noselect {

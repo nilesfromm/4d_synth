@@ -1,15 +1,18 @@
 #wrap {
     width: 100%;
+    align-content: center;
     height: 220px;
     border-top: solid 1px #E0E0E0;
     /* background-color: coral; */
     position: absolute;
     background-color: whitesmoke;
+    display: flex;
+    justify-content: center;
 }
 
 .sine {
     position: relative;
     margin-left: 0px;
-    float: right;
+    /* float: right; */
     width: 60px;
 }

@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useRef, useEffect } from "react"
 import * as s from "./osc.module.css"
 import * as Tone from 'tone'
 import Dial from "./dial"
-import { getState, useStore } from "../utils/store"
+import { useStore } from "../utils/store"
+import * as StartAudioContext from '../utils/StartAudioContext'
 
 function Osc ({
     dest,
@@ -32,10 +33,14 @@ function Osc ({
     }
     const setV = (v) => {
         setAmp(Id,v)
-        console.log(-30 + v/2)
-        ampRef.current.volume.value = -30 + v/3;
+        // console.log(-10 + v/1)
+        ampRef.current.volume.value = -15 + v/1;
     }
     // console.log(Id);
+
+    // StartAudioContext(Tone.context, 's.osc').then(function(){
+    //     //started
+    // })
 
     return (
         <div id={s.osc}>
@@ -52,10 +57,9 @@ function Osc ({
                 if(event.target.value<-59){
                   freqRef.current.stop();
                 }
-                else if(freqRef.current.state == 'stopped'){
+                else if(freqRef.current.state === 'stopped'){
                   freqRef.current.start();
                 }
-                Tone.start();
             }}/>
             <div className={s.dial}>
                 <Dial 

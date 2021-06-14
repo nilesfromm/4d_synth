@@ -11,6 +11,12 @@ import React, {
   const START_ANGLE = Math.PI * 1.5 - (RAD * BOTTOM_ANGLE_DEG) / 2;
   const END_ANGLE = Math.PI * -0.5 + (RAD * BOTTOM_ANGLE_DEG) / 2;
   
+  // if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+  //   const isMobile = true;
+  // }else{
+  //   const isMobile = false;
+  // }
+  
   function getPointPair(r, angle, distance) {
     return [r + distance * Math.cos(angle), r - distance * Math.sin(angle)];
   }
@@ -88,6 +94,9 @@ import React, {
     const [dragStart, setDragStart] = useState<any>(null);
     const isDragging = Boolean(dragStart);
   
+
+    //-----MOUSE-------------------------------------------------------
+
     const onMouseMove = useCallback(
       (e: MouseEvent) => {
         if (!dragStart) return;
@@ -100,6 +109,7 @@ import React, {
       },
       [dragStart, onChange, bipolar, scale]
     );
+
     const onMouseDown = useCallback(
       (e: SyntheticEvent<Element, MouseEvent>) => {
         if (e.nativeEvent.button !== 0) return;
@@ -109,10 +119,11 @@ import React, {
       },
       [setDragStart, onMouseMove, value]
     );
+    
     const onMouseUp = useCallback(() => {
       setDragStart(null);
     }, [setDragStart]);
-  
+
     useEffect(() => {
       if (!isDragging) {
         window.removeEventListener("mousemove", onMouseMove);
@@ -132,6 +143,61 @@ import React, {
       if (!onMouseMove) return;
       return () => window.removeEventListener("mousemove", onMouseMove);
     }, [onMouseMove]);
+
+    //-----TOUCH-------------------------------------------------------
+
+    const onTouchMove = useCallback(
+      (e: TouchEvent) => {
+        if (!dragStart) return;
+        let speed = 1;
+        if (e.shiftKey){
+          speed = 0.1;
+        }
+        // console.log("touchmove!")
+        const newValue = getKnobValue(dragStart, e.touches[0].clientY, speed, bipolar);
+        onChange((newValue * scale));
+      },
+      [dragStart, onChange, bipolar, scale]
+    );
+
+    const onTouchDown = useCallback(
+      (e: SyntheticEvent<Element, TouchEvent>) => {
+        // if (e.nativeEvent.button !== 0) return;
+        e.stopPropagation();
+        setDragStart({ value, y: e.nativeEvent.touches[0].clientY });
+        window.addEventListener("touchmove", onTouchMove);
+        // console.log("touchdown!")
+      },
+      [setDragStart, onTouchMove, value]
+    );
+    
+    const onTouchUp = useCallback(() => {
+      setDragStart(null);
+      // console.log("touchup!")
+    }, [setDragStart]);
+
+    useEffect(() => {
+      if (!isDragging) {
+        window.removeEventListener("touchmove", onTouchMove);
+      }
+      window.addEventListener("touchmove", onTouchMove);
+      return () => window.removeEventListener("touchmove", onTouchMove);
+    }, [isDragging, onTouchMove]);
+  
+    useEffect(() => {
+      window.addEventListener("touchend", onTouchUp);
+      return () => {
+        window.removeEventListener("touchend", onTouchUp);
+      };
+    }, [onTouchUp]);
+  
+    useEffect(() => {
+      if (!onTouchMove) return;
+      return () => window.removeEventListener("touchmove", onTouchMove);
+    }, [onTouchMove]);
+
+
+
   
     const [dotX, dotY] = getPointPair(
       size / 2,
@@ -143,13 +209,15 @@ import React, {
       <div
         style={{
           position: "relative",
-          cursor: "pointer",
+          cursor: "ns-resize",
           height: size,
           width: size,
           overflow: "hidden",
           flexShrink: 0
         }}
         onMouseDown={onMouseDown}
+        onTouchStart={onTouchDown}
+        
       >
         <svg
           width={size}

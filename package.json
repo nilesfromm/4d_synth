@@ -28,6 +28,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "sass": "^1.32.12",
+    "startaudiocontext": "^1.2.1",
     "three": "^0.129.0",
     "tone": "^14.7.77",
     "zustand": "^3.5.1"
